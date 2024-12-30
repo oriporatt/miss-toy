@@ -6,6 +6,7 @@ import { UserMsg } from './cmps/UserMsg'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { ToyIndex } from './pages/ToyIndex'
 
 export default function App() {
   const [count, setCount] = useState(0)
@@ -17,10 +18,7 @@ export default function App() {
               <main className='container'>
                   <Routes>
                       <Route path="/" element={<Home />} />
-                      {/* <Route path="/robot" element={withSuspense(RobotIndex)} >
-                          <Route path='/toy/edit/:toyId?' element=ToyEdit} />
-                      </Route> */}
-                      {/* <Route path="/robot/:robotId" element=ToytDetails/> */}
+                      <Route path="/toy" element={<ToyIndex/>} />
                   </Routes>
               </main>
               <UserMsg />
