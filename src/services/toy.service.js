@@ -14,18 +14,22 @@ const STORAGE_KEY = 'toys'
 
 _createToys()
 
-async function query() {
+async function query(filterBy) {
     try {
         let toys = await storageService.query(STORAGE_KEY)
-        // if (filterBy) {
-        //     let { minBatteryStatus, model = '', type = '' } = filterBy
-        //     minBatteryStatus = minBatteryStatus || 0
-        //     robots = robots.filter(robot =>
-        //         robot.type.toLowerCase().includes(type.toLowerCase()) &&
-        //         robot.model.toLowerCase().includes(model.toLowerCase()) &&
-        //         robot.batteryStatus >= minBatteryStatus
-        //     )
-        // }
+        if (filterBy) {
+            let { toyName='', maxPrice = ''} = filterBy
+            maxPrice = maxPrice || 0
+            toys = toys.filter(toy =>{
+                if (maxPrice) {
+                    return toy.name.toLowerCase().includes(toyName.toLowerCase()) && toy.price <= maxPrice
+                }else {
+                    return toy.name.toLowerCase().includes(toyName.toLowerCase()) 
+                }
+            }
+            
+            )
+        }
         return toys
     } catch (error) {
         console.log('error:', error)
@@ -60,9 +64,9 @@ function createToy(name = '', price = '', labels=[],inStock=true) {
 
 function getDefaultFilter() {
     return {
-        name: '',
-        price: '',
-        labels: [],
+        toyName: '',
+        maxPrice: '',
+        // labels: [],
     }
 }
 

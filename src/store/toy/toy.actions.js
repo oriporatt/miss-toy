@@ -1,18 +1,18 @@
 import { showErrorMsg } from "../../services/event-bus.service";
 import { toyService } from "../../services/toy.service"; 
 import { store } from "../store";
-import { SET_TOYS } from "./toy.reducer";
+import { SET_TOYS,SET_FILTER } from "./toy.reducer";
 
 
 export async function loadToys() {
 
     try {
-        // const filterBy = store.getState().robotModule.filterBy
-        const toys = await toyService.query()
+        const filterBy = store.getState().toyModule.filterBy
+        const toys = await toyService.query(filterBy)
         store.dispatch({ type: SET_TOYS, toys })
     } catch (err) {
-        console.log('Having issues with loading robots:', err)
-        showErrorMsg('Having issues with loading robots:')
+        console.log('Having issues with loading toys:', err)
+        showErrorMsg('Having issues with loading toys:')
         throw err
     }
 }
@@ -49,7 +49,7 @@ export async function loadToys() {
 //     }
 // }
 
-// export function setFilterBy(filterBy) {
-//     store.dispatch({ type: SET_FILTER, filterBy })
-// }
+export function setFilterBy(filterBy) {
+    store.dispatch({ type: SET_FILTER, filterBy })
+}
 
