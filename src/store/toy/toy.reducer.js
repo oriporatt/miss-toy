@@ -10,7 +10,7 @@ const initialState = {
     toys: null,
     filterBy: {},
     isLoading: true,
-    labels: ['On wheels', 'Box game', 'Art', 
+    labelsList: ['On wheels', 'Box game', 'Art', 
         'Baby', 'Doll', 'Puzzle',
         'Outdoor', 'Battery Powered']
 }

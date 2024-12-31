@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 // import { useFormRegister } from "../customHooks/useFormRegister"
 
-export function ToyFilter({ filterBy, onSetFilterBy }) {
+export function ToyFilter({ filterBy, onSetFilterBy ,labelsList}) {
     
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
+
 
     useEffect(() => {
         onSetFilterBy(filterByToEdit)
@@ -21,9 +22,24 @@ export function ToyFilter({ filterBy, onSetFilterBy }) {
             default:
                 break;
         }
-        setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
+        if (type==='checkbox'){
+            let newLabels=labels
+            if (value){
+                newLabels = [...newLabels,field]
+            }else{
+                newLabels=newLabels.filter(label=>label!==field)
+
+            }
+            
+
+            
+            setFilterByToEdit((prevFilter) => ({ ...prevFilter, labels: newLabels  }))
+
+        }else{
+            setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
+        }
     }
-    const { toyName, maxPrice } = filterByToEdit
+    const { toyName, maxPrice,labels } = filterByToEdit
     return (
         <form className="toy-filter">
             <section>
@@ -34,9 +50,22 @@ export function ToyFilter({ filterBy, onSetFilterBy }) {
                 <label htmlFor="maxPrice">Max. Toy Price </label>
                 <input value={maxPrice} onChange={handleChange} name="maxPrice" id="maxPrice" />
             </section>
-            <section>
-                <button>Submit</button>
-            </section>
+
+            {labelsList&&labelsList.map(thisLabel=>{
+                return (
+                    <label key={thisLabel}>
+                        <input 
+                            type="checkbox" 
+                            name={thisLabel}
+                            value={thisLabel}
+                            onChange={handleChange} 
+                            checked={labels.includes(thisLabel)} 
+                        />
+                            {thisLabel}
+                    </label>
+                )}
+            )}
+
         </form>
     )
 }   

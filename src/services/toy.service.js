@@ -18,7 +18,7 @@ async function query(filterBy) {
     try {
         let toys = await storageService.query(STORAGE_KEY)
         if (filterBy) {
-            let { toyName='', maxPrice = ''} = filterBy
+            let { toyName='', maxPrice = '',labels=[]} = filterBy
             maxPrice = maxPrice || 0
             toys = toys.filter(toy =>{
                 if (maxPrice) {
@@ -29,6 +29,25 @@ async function query(filterBy) {
             }
             
             )
+            if (labels &&labels.length>0){
+                toys = toys.filter(toy => {
+                    let thisLabelCheck=false
+
+                    toy.labels.filter(thisLable=>{
+
+                        if (labels.includes(thisLable)){
+                            thisLabelCheck=true
+                        }
+
+                        
+                    })
+                    if (thisLabelCheck){
+                        return toy
+                    }
+                    
+                })
+            }
+
         }
         return toys
     } catch (error) {
@@ -66,9 +85,10 @@ function getDefaultFilter() {
     return {
         toyName: '',
         maxPrice: '',
-        // labels: [],
+        labels: [],
     }
 }
+
 
 
 function getFilterFromSearchParams(searchParams) {
@@ -80,6 +100,9 @@ function getFilterFromSearchParams(searchParams) {
     return filterBy
 }
 
+
+
+
 function _createToys() {
     let toys = utilService.loadFromStorage(STORAGE_KEY)
     if (!toys || !toys.length) {
@@ -88,7 +111,7 @@ function _createToys() {
               _id: 't102',
               name: 'Remote Control Car',
               price: 79,
-              labels: ['Car', 'Remote Controlled', 'Outdoor'],
+              labels: ['On wheels', 'Doll', 'Outdoor'],
               createdAt: 1672531191000,
               inStock: true,
             },
@@ -96,7 +119,7 @@ function _createToys() {
               _id: 't103',
               name: 'Lego Building Set',
               price: 45,
-              labels: ['Building', 'Blocks', 'STEM'],
+              labels: ['Outdoor', 'Art', 'Baby'],
               createdAt: 1675209591000,
               inStock: false,
             },
@@ -104,7 +127,7 @@ function _createToys() {
               _id: 't104',
               name: 'Action Figure',
               price: 35,
-              labels: ['Action', 'Collectible', 'Superhero'],
+              labels: ['Doll', 'Baby', 'Battery Powered'],
               createdAt: 1677587991000,
               inStock: true,
             },

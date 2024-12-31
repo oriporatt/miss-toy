@@ -9,6 +9,7 @@ export function ToyPreview({ toy }) {
             <Link to={`/toy/${toy.id}`}>
                 <h4>Name: {toy.name}</h4>
                 <h4>Price: {toy.price}</h4>
+                <h4>Labels: {toy.labels}</h4>
             </Link>
         </article>
     )

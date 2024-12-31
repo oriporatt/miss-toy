@@ -14,6 +14,7 @@ export  function ToyIndex() {
     const [searchParams, setSearchParams] = useSearchParams()
     const toys = useSelector(storeState => storeState.toyModule.toys)
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
+    const labelsList = useSelector(storeState => storeState.toyModule.labelsList)
     const onSetFilterByDebounce = useRef(debounce(onSetFilterBy, 400)).current
 
 
@@ -47,11 +48,11 @@ export  function ToyIndex() {
 
     if (!toys) return <div>Loading...</div>
 
-    const { toyName, maxPrice } = filterBy
+    const { toyName, maxPrice,labels } = filterBy
     return (
         <section className="toy-index">
             <h1>Welcome! this is our toys</h1>
-            <ToyFilter onSetFilterBy={onSetFilterByDebounce} filterBy={{ toyName, maxPrice }} />
+            <ToyFilter onSetFilterBy={onSetFilterByDebounce} filterBy={{ toyName, maxPrice,labels }} labelsList={labelsList} />
             {/* <RobotFilterType filterBy={{ type }} onSetFilterBy={onSetFilterByDebounce} /> */} 
             <Link to='/toy/edit'>Add Toy</Link>
             <ToyList toys={toys}  />
