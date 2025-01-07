@@ -7,7 +7,7 @@ export function AppHeader() {
 
 
     return (
-        <header className={`app-header `}>
+        <header className={`app-header`}>
             <section className="container">
                 <h1>Toys</h1>
                 <button onClick={() => navigate(-1)}>Back</button>

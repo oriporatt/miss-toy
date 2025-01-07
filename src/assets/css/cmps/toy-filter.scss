@@ -1,16 +1,24 @@
 .toy-filter {
-    display: flex;
-    flex-wrap: wrap;
-    margin-block: 20px;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    // margin-block: 20px;
     gap: 20px;
+    background-color: #95d2ee;
+    
 
+
+    .label-list{
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
-.toy-filter>section {
-    display: flex;
-    flex-direction: column;
-}
 
-.toy-filter>section:last-of-type {
-    justify-content: end;
-}
+// .toy-filter>section {
+//     display: flex;
+//     flex-direction: column;
+// }
+
+// .toy-filter>section:last-of-type {
+//     justify-content: end;
+// }

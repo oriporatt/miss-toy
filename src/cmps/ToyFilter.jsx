@@ -50,21 +50,23 @@ export function ToyFilter({ filterBy, onSetFilterBy ,labelsList}) {
                 <label htmlFor="maxPrice">Max. Toy Price </label>
                 <input value={maxPrice} onChange={handleChange} name="maxPrice" id="maxPrice" />
             </section>
-
-            {labelsList&&labelsList.map(thisLabel=>{
-                return (
-                    <label key={thisLabel}>
-                        <input 
-                            type="checkbox" 
-                            name={thisLabel}
-                            value={thisLabel}
-                            onChange={handleChange} 
-                            checked={labels.includes(thisLabel)} 
-                        />
-                            {thisLabel}
-                    </label>
+            <div className="label-list">
+                {labelsList&&labelsList.map(thisLabel=>{
+                    return (
+                        <label key={thisLabel}>
+                            <input 
+                                type="checkbox" 
+                                name={thisLabel}
+                                value={thisLabel}
+                                onChange={handleChange} 
+                                checked={labels.includes(thisLabel)} 
+                            />
+                                {thisLabel}
+                        </label>
+                    )}
                 )}
-            )}
+            </div>
+
 
         </form>
     )

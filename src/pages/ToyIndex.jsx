@@ -51,7 +51,6 @@ export  function ToyIndex() {
     const { toyName, maxPrice,labels } = filterBy
     return (
         <section className="toy-index">
-            <h1>Welcome! this is our toys</h1>
             <ToyFilter onSetFilterBy={onSetFilterByDebounce} filterBy={{ toyName, maxPrice,labels }} labelsList={labelsList} />
             {/* <RobotFilterType filterBy={{ type }} onSetFilterBy={onSetFilterByDebounce} /> */} 
             <Link to='/toy/edit'>Add Toy</Link>

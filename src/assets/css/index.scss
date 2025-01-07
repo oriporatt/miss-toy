@@ -6,8 +6,15 @@
 
 /* Pages */
 @use "./pages/home.scss";
+@use "./pages/toy-index.scss";
+
 
 
 /* Components */
 @use "./cmps/app-header.scss";
-@use "./cmps/toy-filter.scss"
+@use "./cmps/toy-filter.scss";
+@use "./cmps/toy-list.scss";
+@use "./cmps/robot-preview.scss";
+
+
+
